@@ -1,30 +1,17 @@
-const express=require('express');
-const cors=require('cors');
-require('./db/config');
-const User=require('./db/User');
-const { response } = require('express');
-const app=express();
-const path=require('path');
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-app.use(cors());
-app.use(express.json());
-const PORT=process.env.PORT || 7789;
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
-app.post('/register',async(req,res)=>{
-    let user=new User(req.body)
-    let result=await user.save();
-    res.send(result);
-
-})
-app.get("*",(req,res)=>{
-    res.sendFile(
-        path.join(__dirname,"./Frontend/build/index.html"),
-        function(err){
-            if(err){
-                res.status(500).send(err);
-            }
-        }
-    )
-})
-
-app.listen(PORT);
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
